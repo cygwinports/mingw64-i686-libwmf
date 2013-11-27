@@ -3,7 +3,7 @@ inherit cross
 
 NAME="mingw64-i686-libwmf"
 VERSION=0.2.8.4
-RELEASE=1
+RELEASE=2
 CATEGORY="Devel"
 SUMMARY="Windows Metafile library for Win32 toolchain"
 DESCRIPTION="libwmf is a library for reading vector images in Microsoft's native
@@ -22,10 +22,11 @@ CYGCONF_ARGS="
 	--with-zlib
 	--with-png
 	--with-jpeg
+	--without-x
 "
 
 src_install() {
 	cd ${B}
-	cyginstall bin_PROGRAMS= loaderdir=$(pkg-config --variable=gdk_pixbuf_moduledir gdk-pixbuf-2.0)
+	cyginstall bin_PROGRAMS= loaderdir=$($PKG_CONFIG --variable=gdk_pixbuf_moduledir gdk-pixbuf-2.0)
 	rm -fr ${D}${CROSS_DATADIR}/doc/
 }
